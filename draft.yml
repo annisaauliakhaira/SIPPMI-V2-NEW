@@ -1,0 +1,20 @@
+models:
+  Fakultas:
+    nama: string
+    singkatan: string
+    kode: string
+
+controllers:
+  Fakultas:
+    index:
+      query: all
+      render: backend.fakultas.index with:fakultases
+
+    create:
+      render: backend.fakultas.create
+
+    store:
+      validate: nama
+      save: fakultas
+      redirect: backend.post.index
+
