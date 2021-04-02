@@ -15,7 +15,7 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        $user = \App\Models\User::factory()->create([
+        $user = \App\Models\User::create([
             'username' => 'admin_sistem',
             'name' => 'Administrator_Sistem',
             'password' => bcrypt('admin_sistem'),
@@ -37,30 +37,12 @@ class AdminSeeder extends Seeder
         }
 
         $permissions = [
-            'users_manage',
-            'roles_access',
-            'roles_manage',
-            'dosen_access',
-            'dosen_manage',
-            'prodi_access',
-            'prodi_manage',
-            'penelitian_access',
-            'penelitian_manage',
-            'pengabdian_access',
+            'user_access','users_manage', 'roles_access', 'roles_manage', 'dosen_access', 'dosen_manage', 'fakultas_access', 'fakultas_manage', 'prodi_access', 'prodi_manage', 'penelitian_access', 'penelitian_manage', 'pengabdian_access', 'skema_access', 'skema_manage','penelitian_submit', 'pengabdian_submit',
         ];
 
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
             $admin->givePermissionTo($permission);
-        }
-
-        $permissions = [
-            'penelitian_submit',
-            'pengabdian_submit',
-        ];
-
-        foreach ($permissions as $permission){
-            Permission::create(['name' => $permission]);
         }
 
         $user->assignRole('admin_sistem');

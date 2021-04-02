@@ -53,13 +53,17 @@
     <x-label class="control-label"><b>Anggaran Biaya</b></x-label>
     <button class="btn btn-sm btn-primary clone_add" type="button" wire:click="addAnggaranBiaya({{ $anggaran_biaya }})">add</button>
     <div class="row item_clone">
-        <div class="form-group col-sm-4">
-            <x-label class="control-label">Keterangan</x-label>
-            <x-input type="text" wire:model="keterangan.1" value=""/>
+        <div class="form-group col-sm-2">
+            <x-label class="control-label">Jumlah</x-label>
+            <x-input type="text" wire:model="jumlah.1" value=""/>
         </div>
-        <div class="form-group col-sm-4">
-            <x-label class="control-label">Biaya</x-label>
-            <x-input type="text" wire:model="biaya.1"/>
+        <div class="form-group col-sm-2">
+            <x-label class="control-label">Harga Satuan</x-label>
+            <x-input type="text" wire:model="harga_satuan.1"/>
+        </div>
+        <div class="form-group col-sm-2">
+            <x-label class="control-label">Total</x-label>
+            <x-input type="text" wire:model="jumlah_final.1"/>
         </div>
         <div class="col-sm-4 pt-4">
             <button type="button" class="btn btn-sm btn-danger cancel">cancel</button>
@@ -67,13 +71,17 @@
     </div>
     @foreach ($form_biaya as $key => $value)
         <div class="row item_clone">
-            <div class="form-group col-sm-4">
-                <x-label class="control-label">Keterangan</x-label>
-                <x-input type="text" wire:model="keterangan.{{ $value }}" value=""/>
+            <div class="form-group col-sm-2">
+                <x-label class="control-label">Jumlah</x-label>
+                <x-input type="text" wire:model="jumlah.{{ $value }}" value=""/>
             </div>
-            <div class="form-group col-sm-4">
-                <x-label class="control-label">Biaya</x-label>
-                <x-input type="text" wire:model="biaya.{{ $value }}"/>
+            <div class="form-group col-sm-2">
+                <x-label class="control-label">Harga Satuan</x-label>
+                <x-input type="text" wire:model="harga_satuan.{{ $value }}"/>
+            </div>
+            <div class="form-group col-sm-2">
+                <x-label class="control-label">Total</x-label>
+                <x-input type="text" wire:model="jumlah_final.{{ $value }}"/>
             </div>
             <div class="col-sm-4 pt-4">
                 <button type="button" class="btn btn-sm btn-danger cancel" wire:click="removeAnggaranBiaya({{ $key }})">cancel</button>

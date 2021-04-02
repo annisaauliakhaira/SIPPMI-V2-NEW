@@ -11,7 +11,7 @@ class CreateBiayaSkemasTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up() 
     {
         Schema::create('biaya_skemas', function (Blueprint $table) {
             $table->id();

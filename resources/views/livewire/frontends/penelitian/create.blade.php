@@ -236,9 +236,9 @@
                 <!-- progressbar -->
                 <ul id="progressbar" class="text-center">
                     <li class="active" id="informasi_dasar" ><strong>Informasi Dasar</strong></li>
-                    <li class="{{ $step==1 ? 'active' : '' }}" id="ringkasan"><strong>Ringkasan</strong></li>
-                    <li class="{{ $step==2 ? 'active' : '' }}" id="peneliti"><strong>Peneliti</strong></li>
-                    <li class="{{ $step==3 ? 'active' : '' }}" id="confirm"><strong>Submit</strong></li>
+                    <li class="{{ $step==1  ? 'active' : ''  }}" id="ringkasan"><strong>Ringkasan</strong></li>
+                    <li class="{{ $step==2 || $step==1  ? 'active' : ''}} " id="peneliti"><strong>Peneliti</strong></li>
+                    <li class="{{ $step==3 || $step==1 || $step==2  ? 'active' : ''  }}" id="confirm"><strong>Submit</strong></li>
                 </ul>
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>

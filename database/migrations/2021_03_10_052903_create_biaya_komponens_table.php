@@ -12,7 +12,7 @@ class CreateBiayaKomponensTable extends Migration
         Schema::create('biaya_komponens', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->text('keterangan');
+            $table->text('keterangan'); 
             $table->timestamps();
 
         });

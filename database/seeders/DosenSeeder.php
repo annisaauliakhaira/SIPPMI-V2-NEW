@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Dosen;
+use App\Models\Reviewers;
 use App\Models\User;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -32,6 +33,7 @@ class DosenSeeder extends Seeder
                 "jenis_kelamin" => "laki-laki",
                 "pangkat_golongan" => NULL,
                 "telepon" => "081363491004",
+                'reviewer' => true
             ),
             array(
                 "gelar_depan" => NULL,
@@ -47,6 +49,7 @@ class DosenSeeder extends Seeder
                 "jenis_kelamin" => "laki-laki",
                 "pangkat_golongan" => NULL,
                 "telepon" => "085263098489",
+                'reviewer' => false
             ),
             
             array(
@@ -63,8 +66,27 @@ class DosenSeeder extends Seeder
                 "jenis_kelamin" => "perempuan",
                 "pangkat_golongan" => NULL,
                 "telepon" => "0812",
+                'reviewer' => false
             ),
         );
+
+        $permissions = [
+            'penelitian_access',
+            'penelitian_manage',
+            'pengabdian_access',
+            'penelitian_submit',
+            'pengabdian_submit',
+        ];
+
+        $permissionReviewers = [
+            'penelitian_access', 'penelitian_manage'
+        ];
+        
+        $dosen = Role::findByName('dosen');
+        $reviewer = Role::findByName('reviewer');
+
+        $dosen->givePermissionTo($permissions);
+        $reviewer->givePermissionTo($permissionReviewers);
 
         foreach($dosens as $dosen){
             $user = User::create([
@@ -76,7 +98,7 @@ class DosenSeeder extends Seeder
                 'active' => 1
             ]);
     
-            $user_dosen = Dosen::create([
+            Dosen::create([
                 'id' => $user->id,
                 'gelar_depan' => $dosen['gelar_depan'],
                 'nama' => $dosen['nama'],
@@ -92,25 +114,17 @@ class DosenSeeder extends Seeder
                 'pangkat_golongan' => $dosen['pangkat_golongan'],
                 'telepon' => $dosen['telepon']
             ]);
-        }
+    
+            $user->assignRole('dosen');
+
+            if($dosen['reviewer']){
+                Reviewers::create([
+                    'id' => $user->id,
+                    'status' => 1
+                ]);
+            }
+        }   
+
         
-
-        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
-
-        $dosen = Role::findByName('dosen');
-
-        $permissions = [
-            'penelitian_access',
-            'penelitian_manage',
-            'pengabdian_access',
-            'penelitian_submit',
-            'pengabdian_submit',
-        ];
-
-        foreach ($permissions as $permission) {
-            $dosen->givePermissionTo($permission);
-        }
-
-        $user->assignRole('dosen');
     }
 }
