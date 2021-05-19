@@ -40,9 +40,10 @@ Route::group(['middleware' => 'auth'], function() {
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'backend.'], function(){
 
-    require(__DIR__. '/backend/master.php');
-    require(__DIR__. '/backend/penelitian.php');
-
+    require (__DIR__. '/backend/master.php');
+    require (__DIR__. '/backend/penelitian.php');
+    require (__DIR__. '/backend/skema.php');
+    require (__DIR__. '/backend/output.php');
 
 });
 
@@ -50,5 +51,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dosen', 'as' => 'frontend.'],
 
     require (__DIR__. '/frontend/penelitian.php');
     require (__DIR__. '/frontend/pengabdian.php');
+    require (__DIR__. '/frontend/review_penelitian.php');
 
 });

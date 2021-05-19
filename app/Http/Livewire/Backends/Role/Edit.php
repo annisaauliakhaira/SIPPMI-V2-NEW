@@ -37,7 +37,7 @@ class Edit extends Component
             'permit'=>'required'
         ]);
         try {
-            $role = $this->role->update(['name'=>$this->name]);
+            $this->role->update(['name'=>$this->name]);
             $this->role->givePermissionTo($this->permit);
 
             notify('success', 'Data role berhasil ditambahkan');

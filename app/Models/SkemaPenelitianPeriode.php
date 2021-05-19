@@ -15,4 +15,10 @@ class SkemaPenelitianPeriode extends Model
     protected $fillable = [
         'nama', 'skema_penelitian_id', 'tanggal_mulai_registrasi', 'tanggal_akhir_registrasi', 'tanggal_mulai_penelitian', 'tanggal_akhir_penelitian'
     ];
+
+    
+    public function skema_penelitian()
+    {
+        return $this->hasOne(SkemaPenelitian::class, 'id', 'skema_penelitian_id');
+    }
 }

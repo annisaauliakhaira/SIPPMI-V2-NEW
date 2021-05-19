@@ -37,7 +37,7 @@ class AdminSeeder extends Seeder
         }
 
         $permissions = [
-            'user_access','users_manage', 'roles_access', 'roles_manage', 'dosen_access', 'dosen_manage', 'fakultas_access', 'fakultas_manage', 'prodi_access', 'prodi_manage', 'penelitian_access', 'penelitian_manage', 'pengabdian_access', 'skema_access', 'skema_manage','penelitian_submit', 'pengabdian_submit',
+            'user_access','users_manage', 'roles_access', 'roles_manage', 'dosen_access', 'dosen_manage', 'fakultas_access', 'fakultas_manage', 'prodi_access', 'prodi_manage', 'penelitian_manage', 'skema_access', 'skema_manage', 'penelitian_anggota_manage'
         ];
 
         foreach ($permissions as $permission) {

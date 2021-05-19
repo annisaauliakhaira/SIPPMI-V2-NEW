@@ -31,11 +31,7 @@ class AdminUnitSeeder extends Seeder
             'dosen_manage',
             'prodi_access',
             'prodi_manage',
-            'penelitian_access',
             'penelitian_manage',
-            'pengabdian_access',
-            'penelitian_submit',
-            'pengabdian_submit',
         ];
 
         $admin_unit = Role::findByName('admin_unit');

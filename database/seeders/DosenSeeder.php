@@ -11,11 +11,6 @@ use Spatie\Permission\Models\Role;
 
 class DosenSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         $dosens = array(
@@ -72,20 +67,25 @@ class DosenSeeder extends Seeder
 
         $permissions = [
             'penelitian_access',
-            'penelitian_manage',
             'pengabdian_access',
-            'penelitian_submit',
-            'pengabdian_submit',
+            'penelitian_anggota_access',
         ];
 
-        $permissionReviewers = [
-            'penelitian_access', 'penelitian_manage'
-        ];
         
         $dosen = Role::findByName('dosen');
         $reviewer = Role::findByName('reviewer');
+        
 
-        $dosen->givePermissionTo($permissions);
+        foreach ($permissions as $permission) {
+            Permission::create(['name' => $permission]);
+            $dosen->givePermissionTo($permission);
+        }
+
+        
+        $permissionReviewers = [
+            'penelitian_access'
+        ];
+
         $reviewer->givePermissionTo($permissionReviewers);
 
         foreach($dosens as $dosen){

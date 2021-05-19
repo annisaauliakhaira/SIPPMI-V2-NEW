@@ -1,11 +1,10 @@
 @props([
     'url' => '#',
-    'size' => 'sm',
+    'size' => 'm',
     'type' => 'primary',
-    'icon' => 'cil-pencil'
+
 ])
 
 <a href='{{ $url }}' class='btn btn-{{ $size }} btn-{{ $type }}'>
-    <i class='{{ $icon }}'></i>
     {{ $slot }}
 </a>

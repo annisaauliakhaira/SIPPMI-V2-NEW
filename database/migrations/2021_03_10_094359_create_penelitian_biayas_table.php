@@ -15,16 +15,16 @@ class CreatePenelitianBiayasTable extends Migration
     {
         Schema::create('penelitian_biayas', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('penelitian_id')->unsigned();
+            $table->bigInteger('penelitian_id')->unsigned()->nullable();
             $table->foreign('penelitian_id')->references('id')->on('penelitians')->onDelete('cascade')->onUpdate('cascade');
-            $table->bigInteger('biaya_skema_id')->unsigned();
+            $table->bigInteger('biaya_skema_id')->unsigned()->nullable();
             $table->foreign('biaya_skema_id')->references('id')->on('biaya_skemas')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('jumlah');
-            $table->integer('jumlah_final');
-            $table->integer('satuan');
-            $table->integer('harga_satuan_final');
-            $table->string('justifikasi');
-            $table->string('status');
+            $table->integer('jumlah')->nullable();
+            $table->integer('jumlah_final')->nullable();
+            $table->string('satuan')->nullable();
+            $table->integer('harga_satuan_final')->nullable();
+            $table->string('justifikasi')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

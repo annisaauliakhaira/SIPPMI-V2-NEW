@@ -3,7 +3,7 @@
     'size' => 'sm',
 ])
 
-<a href='{{ $url }}' class='btn btn-{{ $size }} btn-info'>
-    <i class='cil-pencil'></i>
+<a href='{{ $url }}' class='btn btn-{{ $size }} btn-warning'>
+    <i class="fi-rr-edit"></i>
     {{ $slot }}
 </a>

@@ -146,7 +146,7 @@
                 #progressbar li {
                     list-style-type: none;
                     font-size: 15px;
-                    width: 25%;
+                    width: 20%;
                     float: left;
                     position: relative;
                     font-weight: 400
@@ -169,6 +169,12 @@
                     font-family: FontAwesome;
                     text-align: center;
                     content: "\f007"
+                }
+
+                #progressbar #anggaran_biaya:before {
+                    font-family: FontAwesome;
+                    text-align: center;
+                    content: "\f155"
                 }
 
                 #progressbar #confirm:before {
@@ -222,7 +228,6 @@
         </style>
     </x-slot>
 
-
     <x-card>
         {{ html()->form('#')->acceptsFiles()->attribute('wire:submit.prevent','store')->open() }}
 
@@ -237,25 +242,24 @@
                 <ul id="progressbar" class="text-center">
                     <li class="active" id="informasi_dasar" ><strong>Informasi Dasar</strong></li>
                     <li class="{{ $step==1  ? 'active' : ''  }}" id="ringkasan"><strong>Ringkasan</strong></li>
-                    <li class="{{ $step==2 || $step==1  ? 'active' : ''}} " id="peneliti"><strong>Peneliti</strong></li>
-                    <li class="{{ $step==3 || $step==1 || $step==2  ? 'active' : ''  }}" id="confirm"><strong>Submit</strong></li>
+                    <li class="{{ $step==2   ? 'active' : '' || $step==1}} " id="peneliti"><strong>Peneliti</strong></li>
+                    <li class="{{ $step==3 || $step==2  ? 'active' : ''}} " id="anggaran_biaya"><strong>Anggaran Biaya</strong></li>
+                    <li class="{{ $step==4 || $step==3 || $step==2  || $step==1 ? 'active' : ''  }}" id="confirm"><strong>Submit</strong></li>
                 </ul>
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                 </div> <br> <!-- fieldsets -->
                 <fieldset>
                     @if ($step == 0)
-                        
                             <div class="form-card">
                                 <div class="row">
                                     <div class="col-7">
-                                        <h2 class="fs-subtitle">Step 1 - 4</h2>
+                                        <h2 class="fs-subtitle">Step 1 - 5</h2>
                                     </div>
                                 </div> 
                                 @include('livewire.frontends.penelitian._form')
                             </div> 
                             {{-- <input type="button" name="next" class="next action-button" value="Selanjutnya" /> --}}
-                        
                     @endif
                 </fieldset> 
 
@@ -265,14 +269,13 @@
                             <div class="form-card">
                                 <div class="row">
                                     <div class="col-7">
-                                        <h2 class="fs-subtitle">Step 2 - 4</h2>
+                                        <h2 class="fs-subtitle">Step 2 - 5</h2>
                                     </div>
                                 </div> 
                                 @include('livewire.frontends.penelitian._ringkasan')
                             </div> 
                             {{-- <input type="button" name="next" class="next action-button" value="Selanjutnya" /> 
                             <a href="#" class="btn btn-danger">Kembali</a> --}}
-                        
                     @endif
                 </fieldset> 
 
@@ -282,23 +285,37 @@
                             <div class="form-card">
                                 <div class="row">
                                     <div class="col-7">
-                                        <h2 class="fs-subtitle">Step 3 - 4</h2>
+                                        <h2 class="fs-subtitle">Step 3 - 5</h2>
                                     </div>
                                 </div>
                                 @include('livewire.frontends.penelitian.peneliti')
                             </div> 
                             {{-- <input type="button" name="next" class="next action-button" value="Submit" /> --}}
+                    @endif
+                </fieldset> 
+
+                <fieldset>
+                    @if ($step == 3)
                         
+                            <div class="form-card">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <h2 class="fs-subtitle">Step 4 - 5</h2>
+                                    </div>
+                                </div>
+                                @include('livewire.frontends.penelitian.peneliti')
+                            </div> 
+                            {{-- <input type="button" name="next" class="next action-button" value="Submit" /> --}}
                     @endif
                 </fieldset> 
                 
                 
                 <fieldset>
-                    @if ($step >2)
+                    @if ($step >3)
                         <div class="form-card">
                             <div class="row">
                                 <div class="col-7">
-                                    <h2 class="fs-subtitle">Step 4 - 4</h2>
+                                    <h2 class="fs-subtitle">Step 5 - 5</h2>
                                 </div>
                             </div> <br><br>
                             <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2> <br>
@@ -316,20 +333,17 @@
                
 
                 <div class="mt-2">
-                    @if ($step > 0 && $step<=2)
+                    @if ($step > 0 && $step<=3)
                         <button type="button" wire:click="decreaseStep" class="btn btn-danger mr-3">Back</button>
                     @endif
 
-                    @if ($step <= 2)
+                    @if ($step <= 3)
                         <button type="submit" wire:click="increaseStep" class="btn btn-primary">Next</button>
                     @endif
                 </div>
                 
             </form>
             @csrf
-
-
-
         </x-card-body>
 
         {{ html()->form()->close() }}

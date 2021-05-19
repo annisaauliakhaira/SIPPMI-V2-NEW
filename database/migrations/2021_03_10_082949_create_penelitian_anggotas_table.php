@@ -15,15 +15,15 @@ class CreatePenelitianAnggotasTable extends Migration
     {
         Schema::create('penelitian_anggotas', function (Blueprint $table) {
             $table->id();
-            $table->string('tipe');
-            $table->bigInteger('dosen_id')->unsigned();
+            $table->integer('tipe')->default(1); //1 Dosen, 2 Mahasiswa
+            $table->bigInteger('dosen_id')->unsigned()->nullable();
             $table->foreign('dosen_id')->references('id')->on('dosens')->onDelete('cascade')->onUpdate('cascade');
-            $table->bigInteger('penelitian_id')->unsigned();
+            $table->bigInteger('penelitian_id')->unsigned()->nullable();
             $table->foreign('penelitian_id')->references('id')->on('penelitians')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('nama');
-            $table->string('identifier');
-            $table->string('unit');
-            $table->string('jabatan');
+            $table->string('nama')->nullable();
+            $table->string('identifier')->nullable();
+            $table->string('unit')->nullable();
+            $table->string('jabatan')->nullable();
             $table->timestamps();
         });
     }

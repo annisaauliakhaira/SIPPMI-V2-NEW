@@ -1,8 +1,8 @@
 <div class="form-group">
     <x-label for="judul" value="Judul"/>
-    <x-input wire:model.lazy="judul" id="judul" hidden="judul" class="'form-control '. $errors->has('judul') ? 'is-invalid' : ''"/>
+    <x-input wire:model.lazy="judul" type="hidden"/>
     {{-- {{ html()->label('Judul', 'judul')->class(['control-label']) }}
-    {{ html()->hidden('judul')->id('judul')->class('form-control '. $errors->has('judul') ? 'is-invalid' : '' )->required() }} --}}
+    {{-- {{ html()->hidden('judul')->id('judul')->class('form-control '. $errors->has('judul') ? 'is-invalid' : '' )->required() }} --}}
 
     <div id="editor">
         {!! old('judul', optional($penelitian ?? '')->judul) !!}
@@ -16,7 +16,12 @@
 
 <div class="form-group">
     <x-label for="skema" value="Skema Penelitian"/>
-    {{ html()->select('#')->id('skema_id')->class(['form-control', 'select2', 'is-invalid' => $errors->has('skema')])->placeholder('Pilihan Skema Penelitian') }}
+    <x-select wire:model.lazy="skema">
+        <option value="">--Pilihan--</option>
+        @foreach ($skemas as $skema)
+            <option value="{{ $skema->id }}">{{ $skema->nama }}</option>
+        @endforeach
+    </x-select>
 
     @if($errors->has('skema_id'))
         <div class="invalid-feedback">
@@ -28,38 +33,50 @@
 
 <div class="form-group">
     <x-label for="prodi" value="Prodi"/>
-    {{ html()->select('#')->id('prodi_id')->class(['form-control', 'select2', 'is-invalid' => $errors->has('prodi')])->placeholder('Pilihan Prodi') }}
+    <x-select wire:model.lazy="prodi">
+        <option value="">--Pilihan--</option>
+        @foreach ($prodis as $prodi)
+            <option value="{{ $prodi->id }}">{{ $prodi->nama }}</option>
+        @endforeach
+    </x-select>
 
     @if($errors->has('prodi_id'))
         <div class="invalid-feedback">
             {{ $errors->first('prodi_id') }}
         </div>
     @endif
-    <span class="help-block">{{ html()->label('')->class(['control-label']) }}</span>
 </div>
 
 <div class="form-group">
-    {{ html()->label('Penelitian Multi Tahun', 'multi_tahun')->class(['control-label']) }}
-    {{ html()->select('#')->id('multi_tahun')->class(['form-control', 'select2', 'is-invalid' => $errors->has('multi_tahun')])->placeholder('Pilihan Penelitian Multi Tahun')  }}
+    <x-label for="multi_tahun" value="Penelitian Multi Tahun"/>
+    <x-select wire:model.lazy="multi_tahun">
+        <option value="">--Pilihan--</option>
+        <option value="1">Ya</option>
+        <option value="0">Tidak</option>
+    </x-select>
     @if($errors->has('multi_tahun'))
         <div class="invalid-feedback">
             {{ $errors->first('multi_tahun') }}
         </div>
     @endif
-    <span class="help-block">{{ html()->label('')->class(['control-label']) }}</span>
 </div>
 
-<div id="base_clone">
+<div class="form-group">
+    <x-label for="biaya" value="Anggaran Biaya"/>
+    <x-input wire:model.lazy="biaya" id="biaya"/>
+</div>
+
+{{-- <div id="base_clone">
     <x-label class="control-label"><b>Anggaran Biaya</b></x-label>
     <button class="btn btn-sm btn-primary clone_add" type="button" wire:click="addAnggaranBiaya({{ $anggaran_biaya }})">add</button>
     <div class="row item_clone">
         <div class="form-group col-sm-2">
             <x-label class="control-label">Jumlah</x-label>
-            <x-input type="text" wire:model="jumlah.1" value=""/>
+            <x-input type="text" wire:model.lazy="jumlah.1" value=""/>
         </div>
         <div class="form-group col-sm-2">
             <x-label class="control-label">Harga Satuan</x-label>
-            <x-input type="text" wire:model="harga_satuan.1"/>
+            <x-input type="text" wire:model.lazy="harga_satuan.1"/>
         </div>
         <div class="form-group col-sm-2">
             <x-label class="control-label">Total</x-label>
@@ -88,7 +105,7 @@
             </div>
         </div>
     @endforeach
-</div>
+</div> --}}
 
 <div class="form-group">
     <x-label for="file_lap_keuangan">Laporan Kuangan</x-label>

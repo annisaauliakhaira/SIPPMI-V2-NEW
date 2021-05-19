@@ -9,10 +9,19 @@ class Prodi extends Model
 {
     use HasFactory;
 
-    protected $table = 'prodis';
-    protected $primaryKey = 'id';
+    const validation_rules = [
+        'name' => 'required',
+        'faculty_id' => 'required',
+    ];
 
-    protected $fillable = [
-        'nama', 'fakultas_id', 'kode', 'kode_dikti', 'akreditasi'
-    ]; 
+    protected $table = 'prodis';
+
+    protected $fillable = ['nama','fakultas_id','kode','kode_dikti','akreditasi'];
+
+    protected $guarded = [];
+
+    public function fakultas()
+    {
+        return $this->belongsTo(Fakultas::class,'fakultas_id','id');
+    }
 }

@@ -9,10 +9,17 @@ class Fakultas extends Model
 {
     use HasFactory;
 
-    protected $table = 'fakultas';
-    protected $primaryKey = 'id';
+    protected $table = "fakultas";
+    protected $fillable = ['nama'];
 
-    protected $fillable = [
-        'nama'
-    ]; 
+    const validation_rules = [
+        'name' => 'required'
+    ];
+
+    protected $guarded = [];
+
+    public function departments()
+    {
+        return $this->hasMany(Department::class,'fakultas_id','id');
+    }
 }

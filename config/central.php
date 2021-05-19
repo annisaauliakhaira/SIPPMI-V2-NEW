@@ -9,6 +9,10 @@ return [
         'l' => '450'
     ],
 
+    'path' => [
+        'avatar'    => 'foto-dosen'
+    ],
+
     'system_roles' => [
         'admin_sistem' => 'admin_sistem', //1
         'admin_unit' => 'admin_unit', //2

@@ -59,7 +59,7 @@ class User extends Authenticatable
 
     public function lecturer()
     {
-        return $this->hasOne(Lecturer::class, 'id');
+        return $this->hasOne(Dosen::class, 'id','id');
     }
 
     public function staff()

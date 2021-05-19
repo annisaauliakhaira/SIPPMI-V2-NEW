@@ -18,6 +18,6 @@ class Reviewers extends Model
 
     public function dosen()
     {
-        return $this->hasone(dosen::class, 'id', 'id');
+        return $this->hasone(Dosen::class, 'id', 'id');
     }
 }

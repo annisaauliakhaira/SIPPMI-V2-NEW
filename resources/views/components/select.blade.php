@@ -1,3 +1,3 @@
-<select {{ $attributes->merge(['class' => "['form-control', 'select2', 'is-invalid' => $errors->has('$name')]"]) }} >
+<select {{ $attributes->merge(['class' => "form-control select2"]) }} >
     {{ $slot }}
 </select>

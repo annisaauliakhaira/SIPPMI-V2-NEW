@@ -12,7 +12,7 @@
             <x-label for="ringkasan">
                 <strong>Ringkasan</strong>
             </x-label>
-            <textarea wire:model="comment" row="4" class="form-control w-full h-40 px-5 py-3 border border-gray-400 rounded-lg outline-none focus:shadow-outline" name="comment" placeholder="Your message here...">{{ old('comment') }}</textarea>
+            <textarea wire:model="ringkasan" row="4" class="form-control w-full h-40 px-5 py-3 border border-gray-400 rounded-lg outline-none focus:shadow-outline" name="ringkasan" placeholder="Your message here...">{{ old('ringkasan') }}</textarea>
         </div>
     </x-card-body>
 

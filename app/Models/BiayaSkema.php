@@ -16,9 +16,14 @@ class BiayaSkema extends Model
         'id', 'biaya_komponen_id', 'skema_penelitian_id', 'persen_max', 'persen_min'
     ]; 
 
-    public function biaya_komponens()
+    public function biaya_komponen()
     {
-        return $this->hasMany(biaya_komponens::class, '')
+        return $this->hasOne(BiayaKomponen::class, 'id', 'biaya_komponen_id');
+    }
+
+    public function skema_penelitian()
+    {
+        return $this->hasOne(SkemaPenelitian::class, 'id', 'skema_penelitian_id');
     }
 
 }

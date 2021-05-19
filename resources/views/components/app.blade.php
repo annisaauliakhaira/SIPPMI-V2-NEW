@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="turbolinks-cache-control" content="no-cache">
+
     <title>{{ config('app.name', 'Central') }}</title>
     <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-icon-60x60.png">
@@ -31,6 +33,9 @@
     <link href="{{ asset('vendors/select2/css/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendors/select2/css/select2-coreui.css') }}" rel="stylesheet">
     <link href="{{ asset('vendors/toastr/css/toastr.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/iziToast/dist/css/iziToast.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/uicons/css/uicons-regular-rounded.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
     {{ $css ?? '' }}
     @livewireStyles
@@ -377,6 +382,7 @@
 
 </div>
 
+@livewireScripts
 <!-- CoreUI and necessary plugins-->
 <script src="{{ asset('vendors/jquery/js/jquery.min.js') }}"></script>
 <script src="{{ asset('vendors/select2/js/select2.min.js') }}"></script>
@@ -384,8 +390,38 @@
 <script src="{{ asset('vendors/@coreui/coreui-pro/js/coreui.bundle.min.js') }}"></script>
 <script src="{{ asset('vendors/@coreui/utils/js/coreui-utils.js') }}"></script>
 <script src="{{ asset('vendors/toastr/js/toastr.js') }}"></script>
+<script src="{{ asset('assets/iziToast/dist/js/iziToast.min.js') }}"></script>
+<script src="{{ mix('js/app.js') }}"></script>
+
+@stack('scripts')
+
 <script>
     $(document).ready(function () {
+        @if(session()->has('success'))
+            var message = "{{ session('success') }}"
+            iziToast.success({
+                title: 'Berhasil',
+                message: message,
+                position: 'topRight'
+            });
+
+        @elseif(session()->has('failed'))
+            var message = "{{ session('failed') }}"
+            iziToast.error({
+                title: 'gagal',
+                message: message,
+            });
+        @endif
+
+        window.addEventListener('izitoast:success', event => {
+            iziToast.success({
+                title: event.detail.title,
+                message: event.detail.message,
+                position: 'topRight'
+            });
+        })
+
+
         $('.select2').select2({theme: 'coreui'})
     });
 </script>
@@ -394,6 +430,5 @@
 
 {{-- @yield('javascript') --}}
 {{ $javascript??'' }}
-@livewireScripts
 </body>
 </html>
